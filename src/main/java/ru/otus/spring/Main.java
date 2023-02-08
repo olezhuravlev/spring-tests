@@ -1,7 +1,7 @@
 package ru.otus.spring;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import quoters.TerminatorQuoter;
+import quoters.Quoter;
 
 public class Main {
     // 1. BeanDefinitionDocumentReader - parses context for bean definitions;
@@ -11,9 +11,11 @@ public class Main {
     //     - calls 'init()' method of the bean;
     //     - processes bean with BeanPostProcessor (second phase);
     // 3. BeanPostProcessor - processes beans before publication.
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:context.xml");
-        context.getBean(TerminatorQuoter.class).sayQuote();
+        while (true) {
+            Thread.sleep(100);
+            context.getBean(Quoter.class).sayQuote();
+        }
     }
 }
-
