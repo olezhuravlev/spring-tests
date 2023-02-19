@@ -11,6 +11,7 @@ public class InjectRandomIntAnnotationBeanPostProcessor implements BeanPostProce
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        System.out.println(this.getClass().getCanonicalName() + ": postProcessBeforeInitialization");
         Field[] fields = bean.getClass().getDeclaredFields();
         for (Field field : fields) {
             InjectRandomInt annotation = field.getAnnotation(InjectRandomInt.class);
@@ -28,6 +29,7 @@ public class InjectRandomIntAnnotationBeanPostProcessor implements BeanPostProce
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        System.out.println(this.getClass().getCanonicalName() + ": postProcessAfterInitialization");
         return bean;
     }
 }

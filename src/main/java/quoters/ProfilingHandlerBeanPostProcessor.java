@@ -24,6 +24,7 @@ public class ProfilingHandlerBeanPostProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        System.out.println(this.getClass().getCanonicalName() + ": postProcessBeforeInitialization");
         Class<?> beanClass = bean.getClass();
         if (beanClass.isAnnotationPresent(Profiling.class)) {
             map.put(beanName, beanClass);
@@ -33,6 +34,7 @@ public class ProfilingHandlerBeanPostProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        System.out.println(this.getClass().getCanonicalName() + ": postProcessAfterInitialization");
         Class beanClass = map.get(beanName);
         if (beanClass != null) {
             return Proxy.newProxyInstance(beanClass.getClassLoader(), beanClass.getInterfaces(), new InvocationHandler() {
