@@ -13,5 +13,6 @@ public class Main {
     // 3. BeanPostProcessor - processes beans before publication.
     public static void main(String[] args) throws InterruptedException {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:context.xml");
+        context.getBean(Quoter.class).sayQuote();
     }
 }
